@@ -23,7 +23,7 @@ const Register = () => {
     return (
         <div>
             <h2>
-                Register
+                Register-this-page
             </h2>
             <form onSubmit={handelSubmit}>
                 <input onChange={handelEmailChange} type="email" name="email" id="email" placeholder='inter your mail' />
