@@ -11,6 +11,7 @@ const RegisterRBS = () => {
   }
     return (
       <div className='w-50 mx-auto'>
+        
       <h4 className='text-primary'>Please Register !!!</h4>
       <Form onSubmit={handleRegister}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
