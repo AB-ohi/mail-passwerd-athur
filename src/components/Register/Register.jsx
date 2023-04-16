@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
+
+const auth = getAuth;
+
+
 
 const Register = () => {
     const [email, setEmail] = useState();
@@ -8,6 +13,12 @@ const Register = () => {
         const email = event.target.email.value
         const password = event.target.password.value
         console.log(email, password)
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then()
+        .catch(error => {
+            console.error(error)
+        })
      }
 
     const handelEmailChange = (event) => {
