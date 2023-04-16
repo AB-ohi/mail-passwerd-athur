@@ -26,11 +26,11 @@ const Register = () => {
                 Register-this-page
             </h2>
             <form onSubmit={handelSubmit}>
-                <input onChange={handelEmailChange} type="email" name="email" id="email" placeholder='inter your mail' />
+                <input className='w-50 mb-4 rounded ps-2 bs-border-color-rgb ' onChange={handelEmailChange} type="email" name="email" id="email" placeholder='inter your mail' />
                 <br />
-                <input onBlur={handelPasswordBlur} type="password" name="password" id="password" placeholder='your password' />
+                <input className='w-50 mb-4 rounded ps-2 bs-border-color-rgb ' onBlur={handelPasswordBlur} type="password" name="password" id="password" placeholder='your password' />
                 <br />
-                <input type="submit" value="register" />
+                <input className='' type="submit" value="register" />
             </form>
         </div>
     );
