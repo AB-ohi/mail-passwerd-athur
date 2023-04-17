@@ -1,5 +1,5 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react';
+import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import React, { useRef, useState } from 'react';
 import app from '../../firebash/firebase-config';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ const auth = getAuth(app)
 const Login = () => {
     const [error,setError] = useState('')
     const [success, setSuccess] = useState('');
+    const emailRef = useRef();
 
     const handelLogin = event =>{
         event.preventDefault();
@@ -16,7 +17,7 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
-        console.log(email,password)
+        // console.log(email,password)
 
         setError('');
         setSuccess('');
@@ -45,13 +46,29 @@ const Login = () => {
             setError(error.messags)
         })
     }
+    const handelResetPassword = event => {
+        const email = emailRef.current.value;
+        if(!email){
+            alert ('please provide your email address to reset passwordasf')
+            return;
+        }
+
+        sendPasswordResetEmail(auth, email)
+        .then( () =>{
+            alert('please check your email')
+        })
+        .catch(error =>{
+            console.log(error)
+            setError(error.messags)
+        })
+    }
     return (
         <div>
             <h2>Please login</h2>
             <form onSubmit={handelLogin}>
                 <div className="mb-3">
                     <label htmlFor="username" className="form-label">Username</label>
-                    <input type="text"  name='email' className="form-control" id="username" placeholder="Enter your username" required />
+                    <input type="text"  name='email' ref={emailRef} className="form-control" id="username" placeholder="Enter your username" required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password</label>
