@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from 'firebase/auth'
 // import app from '../../firebase/firebase.config';
 import { Link } from 'react-router-dom';
+import app from '../../firebash/firebase-config';
 
-const auth = getAuth;
+const auth = getAuth(app)
 
 const Register = () => {
     const [error, setError] = useState('');

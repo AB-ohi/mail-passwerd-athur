@@ -1,8 +1,14 @@
-import React from 'react';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import React, { useState } from 'react';
+import app from '../../firebash/firebase-config';
+import { Link } from 'react-router-dom';
+
+
+const auth = getAuth(app)
 
 const Login = () => {
-    const [error,setError] = ('')
-    const [success, setSuccess] = ('');
+    const [error,setError] = useState('')
+    const [success, setSuccess] = useState('');
 
     const handelLogin = event =>{
         event.preventDefault();
@@ -28,6 +34,16 @@ const Login = () => {
             setError('Password must be 6 characters long');
             return;
         }
+
+        signInWithEmailAndPassword(auth,email,password)
+        .then(result =>{
+            const logUser = result.user;
+            setSuccess('User login successful')
+            setError('')
+        })
+        .catch(error => {
+            setError(error.messags)
+        })
     }
     return (
         <div>
@@ -41,9 +57,12 @@ const Login = () => {
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" name='password' className="form-control" id="password" placeholder="Enter your password" required/>
                 </div>
-                <p className='text-danger'>{error}</p>
                 <button type="submit" className="btn btn-primary">Log In</button>
             </form>
+            <p><small>Forget password?Please <button onClick={handelResetPassword}>reset password</button></small></p>
+            <p>New to this website? please <Link to='/register'>Register</Link></p>
+                <p className='text-danger'>{error}</p>
+                <p className='text-success'>{success}</p>
         </div>
     );
 };
